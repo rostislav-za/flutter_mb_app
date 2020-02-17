@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mb_app/template/Starred.dart';
-import 'package:flutter_mb_app/template/User.dart';
-import 'package:flutter_mb_app/template/gists.dart';
-import 'package:flutter_mb_app/template/repo.dart';
+import 'package:flutter_mb_app/ui/Tabs/Starred.dart';
+import 'package:flutter_mb_app/ui/Tabs/User.dart';
+import 'package:flutter_mb_app/ui/Tabs/gists.dart';
+import 'package:flutter_mb_app/ui/Tabs/repo.dart';
+import 'package:flutter_mb_app/utils/strings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-class ShowProfile extends StatefulWidget{
+class ProfileScreen extends StatefulWidget{
   final String username,user;
-  ShowProfile({this.username,this.user});
+  ProfileScreen({this.username,this.user});
   @override
   State<StatefulWidget> createState() {
     return new ProfileState(username:username,user:user);
   }
 }
-class ProfileState extends State<ShowProfile> {
+class ProfileState extends State<ProfileScreen> {
   bool repo_loading = true,
       gist_loading = true,
       star_loading = true,
@@ -57,7 +58,9 @@ class ProfileState extends State<ShowProfile> {
                 data['description'],
                 data['stargazers_count'],
                 data['forks_count'],
-                data['language']
+                data['language'],
+              data['']
+
             ));
         repo_data = true;
       }
@@ -146,33 +149,23 @@ class ProfileState extends State<ShowProfile> {
         length: 6,
         child: new Scaffold(
           appBar: new AppBar(
-              title: new Text(username),
-              bottom: new TabBar(
-                isScrollable: true,
-                tabs: [
-                  new Tab(child: new Text("Overview")),
-                  new Tab(child: new Text("Repository")),
-                  new Tab(child: new Text("Gists")),
-                  new Tab(child: new Text("Starred")),
-                  new Tab(child: new Text("Follower")),
-                  new Tab(child: new Text("Following")),
-                ],
-              )
-          ),
+            title: new Text(username),
+            bottom: new TabBar(
+              isScrollable: true,
+              tabs: [
+                new Tab(child: new Text(Strings.OVERVIEW)),
+                new Tab(child: new Text(Strings.REPOSITORIES)),
+                new Tab(child: new Text(Strings.GISTS)),
+                new Tab(child: new Text(Strings.STARRED)),
+                new Tab(child: new Text(Strings.FOLLOWERS)),
+                new Tab(child: new Text(Strings.FOLLOWING)),
+              ],
+            )
+        ),
           body: new TabBarView(
             children: [
-              new Center(
-                  child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Icon(Icons.code, size: 100.0,),
-                      new Text("Overview", style: Theme
-                          .of(context)
-                          .textTheme
-                          .display2),
-                    ],
-                  )
-              ),
+              new Container(
+                  child: _Profile_data() ),
               new Container(
                   child: _Repo_data()
               ),
@@ -190,6 +183,7 @@ class ProfileState extends State<ShowProfile> {
               ),
             ],
           ),
+
         ),
       ),
     );
@@ -366,4 +360,18 @@ class ProfileState extends State<ShowProfile> {
       );
     }
   }
-}
+
+  Widget _Profile_data(){
+    return Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Icon(Icons.code, size: 100.0,),
+            new Text(Strings.OVERVIEW, style: Theme
+                .of(context)
+                .textTheme
+                .display2),
+          ],
+        )
+    );
+}}

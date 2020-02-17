@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mb_app/utils/strings.dart';
 
 class Gist extends StatelessWidget{
   String description,created_at;
@@ -8,7 +9,7 @@ class Gist extends StatelessWidget{
   Widget build(BuildContext context) {
     return new Card(
       child: new Container(
-        height: 90.0,
+
         padding: EdgeInsets.all(15.0),
         child: new Row(
           children: <Widget>[
@@ -23,9 +24,12 @@ class Gist extends StatelessWidget{
               children: <Widget>[
                 new Container(
                   padding: EdgeInsets.only(bottom: 8.0),
-                  child:new Text(description,style: TextStyle(fontSize: 18.0)),
+                  width: 250,
+                  child:new Text(description,style: TextStyle(fontSize: 18.0),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 12,),
                 ),
-                new Text("Created : $created_at")
+                new Text("${Strings.CREATED} : $created_at")
               ],
             )
           ],

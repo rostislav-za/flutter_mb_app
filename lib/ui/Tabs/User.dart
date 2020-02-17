@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mb_app/utils/ShowProfile.dart';
+import 'package:flutter_mb_app/ui/screens/profile_screen.dart';
+import 'package:flutter_mb_app/utils/strings.dart';
 
 class User extends StatelessWidget {
   final String text;
@@ -13,7 +14,7 @@ class User extends StatelessWidget {
         child: new RaisedButton(
           color: Colors.white,
           onPressed: (){
-            Navigator.push(context, new MaterialPageRoute(builder: (context) => new ShowProfile(username:"Github API",user:this.text)));
+            Navigator.push(context, new MaterialPageRoute(builder: (context) => new ProfileScreen(username:this.text,user:this.text)));
           },
           child: new Container(
               height: 80.0,

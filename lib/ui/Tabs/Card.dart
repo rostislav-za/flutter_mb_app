@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mb_app/utils/ShowProfile.dart';
+import 'package:flutter_mb_app/ui/screens/profile_screen.dart';
+import 'package:flutter_mb_app/utils/strings.dart';
 
 class ProfileCard extends StatelessWidget {
   ProfileCard({this.user,this.text,this.image ,this.public_repos,this.following,this.followers,this.animationController});
@@ -25,7 +26,7 @@ class ProfileCard extends StatelessWidget {
           child: new RaisedButton(
               color: Colors.white,
               onPressed: (){
-                Navigator.push(context, new MaterialPageRoute(builder: (context) => new ShowProfile(username:this.text,user:this.user)));
+                Navigator.push(context, new MaterialPageRoute(builder: (context) => new ProfileScreen(username:this.text,user:this.user)));
               },
               child: new Container(
                 padding: EdgeInsets.symmetric(vertical: 12.0),
@@ -46,13 +47,13 @@ class ProfileCard extends StatelessWidget {
                               style: Theme.of(context).textTheme.title
                           ),
                           new Padding(padding: EdgeInsets.only(bottom: 30.0)),
-                          new Text('Public Repo : $public_repos'),
+                          new Text('${Strings.PUBLIC_REPOSITORIES}: $public_repos'),
                           new Padding(padding: EdgeInsets.only(bottom: 6.0)),
                           new Row(
                             children: <Widget>[
-                              new Text('Followers : $followers'),
+                              new Text('${Strings.FOLLOWERS}: $followers'),
                               new Padding(padding: EdgeInsets.only(right: 15.0)),
-                              new Text('Following : $following')
+                              new Text('${Strings.FOLLOWING} : $following')
                             ],
                           ),
                         ],
